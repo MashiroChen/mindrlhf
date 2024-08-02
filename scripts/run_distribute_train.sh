@@ -16,7 +16,7 @@
 
 echo "=============================================================================================================="
 echo "Please run the script as: "
-echo "bash run_distributed_train.sh DATA_DIR RANK_TABLE_FILE RANK_START LOCAL_DEVICE_NUM SFT_MODEL_PATH, REWARD_MODEL_PATH"
+echo "bash run_distributed_train.sh DATA_DIR RANK_TABLE_FILE RANK_START LOCAL_DEVICE_NUM SFT_MODEL_PATH REWARD_MODEL_PATH"
 echo "for example:"
 echo "#######no pipeline#######"
 echo "bash run_distributed_train.sh /path/train.mindrecord /path/hccl.json 0 8 /path/sft_model /path/reward_model"
