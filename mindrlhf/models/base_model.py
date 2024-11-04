@@ -4,7 +4,7 @@ from mindformers.models.bloom import BloomLMHeadModel, BloomConfig
 from mindformers import LlamaForCausalLM, LlamaConfig
 from mindformers.models.gpt2 import GPT2Config, GPT2LMHeadModel
 from mindformers.models.pangualpha import PanguAlphaHeadModel, PanguAlphaConfig
-from mindformers.models.glm import GLMForPreTraining
+from mindformers.models.glm2 import ChatGLM2ForConditionalGeneration
 from mindrlhf.models.baichuan2.baichuan2_7b import Baichuan7BV2ForCausalLM
 
 
@@ -51,9 +51,9 @@ class BaseModel(nn.Cell):
             self.backbone = self.model.model
             self.lm_head = self.model.lm_head
         elif self.model_type == 'glm':
-            self.model = GLMForPreTraining(model_config)
+            self.model = ChatGLM2ForConditionalGeneration(model_config)
             self.backbone = self.model.transformer
-            self.lm_head = self.model.lm_head
+            self.lm_head = self.model.transformer.output_layer
 
     def select_critic_model(self, model_config):
         self.model_type = None
@@ -83,7 +83,7 @@ class BaseModel(nn.Cell):
             self.model = LlamaForCausalLM(model_config)
             self.backbone = self.model.model
         elif self.model_type == 'glm':
-            self.model = GLMForPreTraining(model_config)
+            self.model = ChatGLM2ForConditionalGeneration(model_config)
             self.backbone = self.model.transformer
 
     def select_reward_model(self, model_config):
@@ -114,5 +114,5 @@ class BaseModel(nn.Cell):
             self.model = LlamaForCausalLM(model_config)
             self.backbone = self.model.model
         elif self.model_type == 'glm':
-            self.model = GLMForPreTraining(model_config)
+            self.model = ChatGLM2ForConditionalGeneration(model_config)
             self.backbone = self.model.transformer
